@@ -63,7 +63,7 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom.">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -74,7 +74,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom.">
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -84,7 +84,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez entrer une adresse e-mail valide.">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -104,13 +104,13 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Veuillez entrer un nombre entier compris entre 0 et 99">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">Quelles villes ?</p>
               <div
-                class="formData">
+                class="formData" data-error="Vous devez choisir une ville">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -180,13 +180,12 @@
               </div>
 
               <div
-                class="formData">
+                class="formData" data-error="Vous devez accepter les conditions d'utilisation.">
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
                   name="terms"
-                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
