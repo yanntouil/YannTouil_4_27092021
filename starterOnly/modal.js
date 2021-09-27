@@ -18,12 +18,13 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  showModalForm();// Reset form display
 }
 
 /**
  * Close Modal listener
  */
- document.querySelectorAll(".close").forEach(
+ document.querySelectorAll(".modal-close").forEach(
   (el) => el.addEventListener("click", 
     (e) => modalbg.style.display = ''
 ));
@@ -91,6 +92,10 @@ function validate() {
   // Check validation errors
   if (formErrors > 0) {
     return false;
+  } else {
+    // Do something with data
+    form.reset();// Reset form data
+    showModalThanks();
   }
   return false;
 }
@@ -105,6 +110,20 @@ function showFieldError(el) {
  * Hide field error
  * @param el
  */
- function hideFieldError(el) {
+function hideFieldError(el) {
   el.closest('.formData').dataset.errorVisible = null;
+}
+/**
+ * Show Modal thanks
+ */
+function showModalThanks() {
+  document.forms["reserve"].style.display = 'none';
+  document.getElementById("booking-thanks").style.display = '';
+}
+/**
+ * Show Modal form
+ */
+function showModalForm() {
+  document.getElementById("booking-thanks").style.display = 'none';
+  document.forms["reserve"].style.display = '';
 }
