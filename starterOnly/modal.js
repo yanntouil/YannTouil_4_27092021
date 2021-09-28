@@ -1,39 +1,59 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
 
-// DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-  showModalForm();// Reset form display
-}
 
+
+
+
+
+
+/**
+ * Dom ref
+ */
+const modal = document.getElementById("modal");
+const openModal = document.querySelectorAll(".openModal");
+const closeModal = document.querySelectorAll(".closeModal");
+const toggleMenu = document.querySelectorAll(".toggleMenu");
+const form = document.forms["reserve"];
+
+
+/**
+ * Open Modal listener
+ */
+openModal.forEach(
+  (el) => el.addEventListener("click", 
+    (e) => {
+      document.body.classList.add('modal-open');
+      window.scrollTo(0, 0);
+      modal.scrollTo(0, 0);
+      document.body.style.overflow = 'hidden';
+    }
+));
 /**
  * Close Modal listener
  */
- document.querySelectorAll(".modal-close").forEach(
+closeModal.forEach(
   (el) => el.addEventListener("click", 
-    (e) => modalbg.style.display = ''
+    (e) => {
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      showModalForm();
+    }
+));
+/**
+ * Toggle menu
+ */
+toggleMenu.forEach(
+  (el) => el.addEventListener("click", 
+    (e) => {
+      document.body.classList.toggle('menu-open');
+    }
 ));
 
 /**
- * Form data validation
+ * Data validation before submit
  */
 function validate() {
-  const form = document.forms["reserve"];
   let formErrors = 0;
   // Field firstname must have a minimum 2 characters and can not be empty
   const firstName = form.querySelectorAll('input[name="first"]')[0];
@@ -43,6 +63,7 @@ function validate() {
   } else {
     hideFieldError(firstName);
   }
+
   // Field lastname must have a minimum 2 characters and can not be empty
   const lastName = form.querySelectorAll('input[name="last"]')[0];
   if (lastName.value.length <= 1) {
@@ -51,6 +72,7 @@ function validate() {
   } else {
     hideFieldError(lastName);
   }
+
   // Field email must be a valid email
   const email = form.querySelectorAll('input[name="email"]')[0];
   const mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -60,6 +82,7 @@ function validate() {
   } else {
     hideFieldError(email);
   }
+
   // Field quantity must be not empty, numeric and integer
   const quantity = form.querySelectorAll('input[name="quantity"]')[0];
   if (!(quantity.value != '' && !isNaN(quantity.value) && Number.isInteger(Number(quantity.value)))) {
@@ -68,6 +91,7 @@ function validate() {
   } else {
     hideFieldError(quantity);
   }
+  
   // One of fields location must be selected
   const radioList = form.querySelectorAll('input[name="location"]');
   let radioValue;
@@ -81,6 +105,7 @@ function validate() {
   } else {
     hideFieldError(radioList[0]);
   }
+
   // Field terms must be checked
   const terms = form.querySelectorAll('input[name="terms"]')[0];
   if (!terms.checked) {
@@ -89,30 +114,34 @@ function validate() {
   } else {
     hideFieldError(terms);
   }
+
   // Check validation errors
   if (formErrors > 0) {
     return false;
-  } else {
-    // Do something with data
-    form.reset();// Reset form data
-    showModalThanks();
   }
+
+  // Do something with data
+  form.reset();// Reset form data
+  showModalThanks();
   return false;
 }
+
 /**
  * Show field error
  * @param {HTMLElement} el
  */
 function showFieldError(el) {
-  el.closest('.formData').dataset.errorVisible = 'true';
+  el.closest('.form-group').dataset.errorVisible = 'true';
 }
+
 /**
  * Hide field error
- * @param el
+ * @param {HTMLElement} el
  */
-function hideFieldError(el) {
-  el.closest('.formData').dataset.errorVisible = null;
+ function hideFieldError(el) {
+  el.closest('.form-group').dataset.errorVisible = null;
 }
+
 /**
  * Show Modal thanks
  */
@@ -120,6 +149,7 @@ function showModalThanks() {
   document.forms["reserve"].style.display = 'none';
   document.getElementById("booking-thanks").style.display = '';
 }
+
 /**
  * Show Modal form
  */
