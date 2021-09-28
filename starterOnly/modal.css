@@ -216,7 +216,7 @@ main {
   .hero-img {
     flex-grow: 0;
     overflow: initial;
-    border-radius: none;
+    border-radius: 0;
   }
   .hero-img img {
     height: initial;
