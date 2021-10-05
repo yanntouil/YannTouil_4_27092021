@@ -30,6 +30,7 @@ openModal.forEach(
       document.body.style.overflow = 'hidden';
     }
 ));
+
 /**
  * Close Modal listener
  */
@@ -41,6 +42,7 @@ closeModal.forEach(
       showModalForm();
     }
 ));
+
 /**
  * Toggle menu
  */
@@ -62,7 +64,7 @@ form.addEventListener("submit",
     // Field firstname must have a minimum 2 characters and can not be empty
     const firstName = form.querySelectorAll('input[name="first"]')[0];
     const nameRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}$/;// european convention 
-    if (!firstName.value.match(nameRegex)) {//
+    if (!firstName.value.trim().match(nameRegex)) {//
       showFieldError(firstName);
       formErrors++;
     } else {
@@ -71,7 +73,7 @@ form.addEventListener("submit",
   
     // Field lastname must have a minimum 2 characters and can not be empty
     const lastName = form.querySelectorAll('input[name="last"]')[0];
-    if (!lastName.value.match(nameRegex)) {
+    if (!lastName.value.trim().match(nameRegex)) {
       showFieldError(lastName);
       formErrors++;
     } else {
