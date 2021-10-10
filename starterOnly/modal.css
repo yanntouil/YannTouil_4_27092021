@@ -172,6 +172,9 @@ main {
   cursor: pointer;
   transition: background-color .3s ease-in-out;
 }
+
+
+
 .btn-signup:hover {
   background: #3876ac;
 }
